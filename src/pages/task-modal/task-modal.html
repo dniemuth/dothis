@@ -5,23 +5,37 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-buttons item-left>
-      <button ion-button class="taskClose" (click)="closeModal()"><ion-icon name="arrow-back"></ion-icon></button>
-    </ion-buttons>
-    <ion-title>{{title}}</ion-title>    
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-  <ion-list>
-    <ion-item>
-      <ion-label fixed>{{ 'Due Date' }}</ion-label>
-      <ion-input type="date" [(ngModel)]="date" name="date"></ion-input>
-    </ion-item>
-  </ion-list>
-
-</ion-content>
+  
+    <ion-navbar>
+      <ion-buttons item-left>
+        <button ion-button class="taskClose" (click)="closeModal()"><ion-icon name="arrow-back"></ion-icon></button>
+      </ion-buttons>
+      <ion-title><ion-textarea type="text" [(ngModel)]="title" >{{title}}</ion-textarea></ion-title>    
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <ion-list>
+      <ion-item>
+        <ion-label>{{ 'Due Date' }}</ion-label>
+        <ion-input type="date" [(ngModel)]="date" name="date"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating> {{ 'Notes' }}  </ion-label>
+        <ion-textarea type="text" [(ngModel)]="notes" name="notes" placeholder=""></ion-textarea>
+      </ion-item>
+    </ion-list>
+  
+  </ion-content>
+  
+  <ion-footer>
+    <ion-toolbar>
+      Created: {{createdDisplay}}
+      <ion-buttons end>
+        <button ion-button class="taskDelete" (click)="deleteTask(this)"><ion-icon name="ios-trash"></ion-icon></button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
+  

@@ -5,39 +5,50 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>login</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-  <div>
-    <ion-list>
-
-      <ion-item>
-        <ion-label fixed>{{'Email'}}</ion-label>
-        <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label fixed>{{'Password'}}</ion-label>
-        <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
-      </ion-item>
-
-      <div padding>
-        <button ion-button color="primary" block (click)="doLogin()" >{{'Login'}}</button>
-      </div>
-      <div padding>
-        <p class="createAccount" (click)="createAccount()">{{'Create New Account'}}</p>
-      </div>
-
-    </ion-list>
-  </div>
-
-  <div padding>
-    <button ion-button color="secondary" block (click)="toHome()">{{'Jump To Home'}}</button>
-  </div>
-</ion-content>
+  
+    <ion-navbar>
+      <ion-title>
+        <div id="navTitleContainer">
+          <span id="navTitle">Login</span>
+          <img src="./assets/images/navLogo.png" id="navLogo" alt="ZenEstate" />
+        </div>
+      </ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <div>
+      <ion-list>
+  
+        <ion-item>
+            <div class="loginLogo"><img src="./assets/images/ZenEstateAlt.png" alt="ZenEstateAlt" /></div>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label fixed>{{'Email'}}</ion-label>
+          <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label fixed>{{'Password'}}</ion-label>
+          <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+        </ion-item>
+  
+        <div padding>
+          <button ion-button color="primary" block (click)="doLogin()" >{{'Login'}}</button>
+        </div>
+  
+        <div padding class="login-error" *ngIf = "loginError">
+          <p>Your email or password is incorrect.</p>
+        </div>
+  
+        <div padding>
+          <p class="createAccount" (click)="createAccount()" align="center">{{'Create New Account'}}</p>
+        </div>
+  
+      </ion-list>
+    </div>
+  </ion-content>
+  
