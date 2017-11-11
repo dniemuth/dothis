@@ -49,7 +49,7 @@ export class TasksPage {
         orderByChild: 'Completed',
         equalTo: false
       }
-    }).map(tasks => tasks.sort(this.orderByDueDate)) as FirebaseListObservable<any>;
+    }).map(tasks => tasks.sort(this.orderByCreated)) as FirebaseListObservable<any>;
     
     //list of completed tasks
     this.completedTasks = this.fdb.list('tasks/' + this.fauth.auth.currentUser.uid, {
@@ -57,7 +57,7 @@ export class TasksPage {
         orderByChild: 'Completed',
         equalTo: true
       }
-    }).map(tasks => tasks.sort(this.orderByCompletedDate)) as FirebaseListObservable<any>;
+    }).map(tasks => tasks.sort(this.orderByCreated)) as FirebaseListObservable<any>;
   }
 
   createNewTask() {
@@ -79,8 +79,6 @@ export class TasksPage {
       this.fdb.database.ref('tasks/' + this.fauth.auth.currentUser.uid).push({
         Title: this.taskTitle,
         Completed: false,
-        Notes: '',
-        DueDate: '',
         Created: firebase.database.ServerValue.TIMESTAMP,
         Author: this.fauth.auth.currentUser.uid,
         Modified: firebase.database.ServerValue.TIMESTAMP,
@@ -101,9 +99,7 @@ export class TasksPage {
         this.deleteTask(task)
       } else {
         this.fdb.database.ref('tasks/' + this.fauth.auth.currentUser.uid + '/' + task.$key).update({
-          DueDate: data.date,
           Title: data.title,
-          Notes: data.notes,
           Modified: firebase.database.ServerValue.TIMESTAMP,
           Editor: this.fauth.auth.currentUser.uid
         });
@@ -135,29 +131,17 @@ export class TasksPage {
     // }); 
   }
 
-  orderByDueDate(a, b) {
-    console.log(a.DueDate + '; ' + b.DueDate);
-    if (a.DueDate < b.DueDate) {
-      if(a.DueDate == '' || a.DueDate == null) {return 1}     
+  orderByCreated(a, b) {
+    console.log(a.Created + '; ' + b.Created);
+    if (a.Created < b.Created) {
+      if(a.Created == '' || a.Created == null) {return 1}     
       else{return -1}
     }
       
-    if (a.DueDate > b.DueDate) {
-      if(b.DueDate == '' || a.DueDate == null) {return -1}
+    if (a.Created > b.Created) {
+      if(b.Created == '' || a.Created == null) {return -1}
       else {return 1 }
     }
-    return 0;
-  }
-
-  orderByCompletedDate(a, b) {
-
-    let aDate = new Date(a.CompletedDate);
-    let bDate = new Date(b.CompletedDate)
-    console.log(aDate);
-    if ( aDate < bDate)
-      return 1;
-    if (aDate > bDate)
-      return -1;
     return 0;
   }
 

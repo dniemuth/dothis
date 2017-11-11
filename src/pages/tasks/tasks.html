@@ -35,9 +35,6 @@
       <ion-item *ngFor="let task of tasks | async" [ngClass]="{'completed': task.Completed}" >
         <ion-checkbox mode="ios" [ngModel]="task.Completed" (ionChange)="toggleComplete(task)" ></ion-checkbox>
         <ion-label (click)="editTask(task)">{{task.Title}}</ion-label>
-        <div class="item-note" item-right (click)="editTask(task)">
-          {{task.DueDate}}
-        </div>
       </ion-item>
     </ion-list>
   
@@ -52,9 +49,6 @@
       <ion-item *ngFor="let ctask of completedTasks | async" [ngClass]="{'completed': ctask.Completed}">
         <ion-checkbox mode="ios" [ngModel]="ctask.Completed" (ionChange)="toggleComplete(ctask)" ></ion-checkbox>
         <ion-label (click)="editTask(ctask)">{{ctask.Title}}</ion-label>
-        <div class="item-note" item-right (click)="editTask(ctask)">
-          {{ctask.DueDate}}
-        </div>
       </ion-item>
     </ion-list>
   
